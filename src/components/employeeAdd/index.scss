@@ -1,0 +1,200 @@
+.addEmployeeContainer {
+    input[type=number].no-spinner::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    .AddEmployeeTitle {
+        padding: 20px 0px;
+
+        h3 {
+            margin: 0;
+        }
+
+        .left-side-content {
+            text-align: left;
+        }
+
+        .right-side-content {
+            ol {
+                justify-content: end;
+            }
+
+        }
+    }
+
+    .AddEmployeeHeader {
+        align-items: center;
+
+        h4 {
+            margin: 0;
+        }
+
+        .left-side-content {
+            text-align: left;
+
+            .ant-form-item {
+                margin-bottom: 20px !important;
+
+                .ant-form-item-control-input-content {
+
+                    input {
+                        border: none;
+                        border-bottom: 1px solid #CED4DA;
+                        border-radius: 0;
+                        box-shadow: none !important;
+
+                    }
+                }
+            }
+        }
+
+        .right-side-content {
+            .updateBtn {
+                background-color: #495057;
+                color: #fff;
+            }
+
+            .cancelBtn {
+                border: 1px solid #F4F4F8;
+                color: #74788D;
+            }
+
+            button {
+                margin-right: 10px;
+            }
+
+        }
+    }
+
+    .AddEmployeeBody {
+        .scroll-content {
+            height: 390px;
+            overflow-x: auto;
+            // box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        }
+
+        .AddEmployeeContent {
+            .left-side-content {
+                .ant-form-item {
+                    margin-bottom: 20px !important;
+
+                    .ant-form-item-control-input-content {
+
+                        input,
+                        textarea {
+                            border: none;
+                            border-bottom: 1px solid #CED4DA;
+                            border-radius: 0;
+                            box-shadow: none !important;
+
+                        }
+
+                        .ant-picker {
+                            width: 100%;
+                            border: none;
+                            border-bottom: 1px solid #CED4DA;
+                            border-radius: 0;
+                            box-shadow: none !important;
+
+                            input {
+                                border: none !important;
+                            }
+                        }
+
+                        .ant-select-selector {
+                            border: none;
+                            border-bottom: 1px solid #CED4DA;
+                            border-radius: 0;
+                            box-shadow: none !important;
+                        }
+                    }
+
+                    .ant-form-item-label {
+                        width: 30%;
+                        text-align: left;
+
+                        label {
+                            color: #74788D !important;
+                        }
+
+                        ::before,
+                        ::after {
+                            content: none !important;
+
+                        }
+                    }
+                }
+
+
+
+            }
+
+            .right-side-content {
+                .ant-form-item {
+                    margin-bottom: 20px !important;
+
+                    .ant-form-item-control-input-content {
+
+                        input,
+                        textarea {
+                            border: none;
+                            border-bottom: 1px solid #CED4DA;
+                            border-radius: 0;
+                            box-shadow: none !important;
+
+                        }
+
+                        .ant-picker {
+                            width: 100%;
+                            border: none;
+                            border-bottom: 1px solid #CED4DA;
+                            border-radius: 0;
+                            box-shadow: none !important;
+
+                            input {
+                                border: none !important;
+                            }
+                        }
+                    }
+
+                    .ant-form-item-label {
+                        width: 30%;
+                        text-align: left;
+
+                        label {
+                            color: #74788D !important;
+                        }
+
+                        ::before,
+                        ::after {
+                            content: none !important;
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .fileUploadBtn {
+        background-color: green;
+        color: white;
+        padding: 5px;
+        border-radius: 10px;
+        margin-left: 10px;
+
+        input {
+            display: none !important;
+        }
+
+    }
+
+    .uploadImg {
+        width: 100%;
+    }
+
+    
+
+
+}

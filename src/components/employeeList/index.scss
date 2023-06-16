@@ -1,0 +1,76 @@
+.listContainer {
+
+    // position: relative;
+    // top: 60px;
+    .AddEmployeeTitle {
+        align-items: center;
+
+        .right-side-content {
+            ol {
+                justify-content: end;
+            }
+        }
+    }
+
+
+    .title-body {
+        padding: 20px 0px;
+
+        .filterIcons {
+            text-align: right;
+
+            .barIcon {
+                font-size: 20px;
+                background: #F4F4F8;
+                border-radius: 3px;
+                padding: 2px;
+            }
+            .menuIcon{
+                font-size: 20px;  
+            }
+        }
+
+        .right-content {
+            h3 {
+                margin: 0;
+            }
+        }
+
+        .left-side-content {
+
+
+            button {
+                color: #fff;
+                background: #4e48c8;
+            }
+        }
+    }
+
+    .table-container {
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+
+    .pagination-container {
+        margin: 20px;
+        padding: 20px;
+        text-align: right;
+
+    }
+
+    .m0 {
+        margin: 0;
+    }
+
+
+
+}
+
+.submit-btn {
+    text-align: right;
+}
+
+.ant-modal-title {
+    text-align: center !important;
+    padding: 20px !important;
+    font-size: 20px !important;
+}
