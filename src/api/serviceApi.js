@@ -18,4 +18,8 @@ const allEmployees = () => `${API_URL}/employee`;
 
 const getEmployees = (id) => `${API_URL}/employee/${id}`;
 
-export default { allBranches, allDepartments, allDesignations, allReporters, allShifts, createEmployee, allEmployees, getEmployees };
+const updateEmployee = (id) => `${API_URL}/employee/${id}`;
+
+const deleteEmployee = (id) => `${API_URL}/employee/${id}`;
+
+export default { allBranches, allDepartments, allDesignations, allReporters, allShifts, createEmployee, allEmployees, getEmployees, updateEmployee,deleteEmployee };

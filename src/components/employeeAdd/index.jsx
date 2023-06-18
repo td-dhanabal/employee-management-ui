@@ -5,7 +5,8 @@ import { MoreOutlined, PaperClipOutlined } from '@ant-design/icons';
 import { getRequest, postRequest } from '../../api/http';
 import serviceApi from '../../api/serviceApi';
 import { toast } from "react-toastify";
-import './index.scss'
+import LoaderView from '../loaderView';
+import './index.scss';
 
 export default function EmployeeAdd() {
   const navigate = useNavigate();
@@ -15,9 +16,11 @@ export default function EmployeeAdd() {
   const [designations, setDesignation] = useState([]);
   const [reporters, setReporters] = useState([]);
   const [shifts, setShifts] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+
   const { TextArea } = Input;
 
-  const dateFormat = "DD/MM/YYYY";
   const onFinish = async (values) => {
     console.log('Success:', values);
     console.log('file', file);
@@ -25,7 +28,6 @@ export default function EmployeeAdd() {
       alert("Please first select a file");
       return;
     }
-
     const formData = new FormData();
     formData.append("file", file);
     formData.append("email", values.email);
@@ -60,6 +62,7 @@ export default function EmployeeAdd() {
     formData.append("blood_group", values.blood_group);
     formData.append("status", values.status);
     try {
+      setLoading(false);
       const response = await postRequest(serviceApi.createEmployee(), formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
@@ -68,7 +71,7 @@ export default function EmployeeAdd() {
         navigate('/employees');
       }
     } catch (error) {
-      console.log('err', error);
+      setLoading(false);
       toast.error(error)
     }
   };
@@ -81,56 +84,71 @@ export default function EmployeeAdd() {
   }
   const fetchAllBranches = async () => {
     try {
+      setLoading(true);
       const userResponse = await getRequest(serviceApi.allBranches())
       if (userResponse) {
+        setLoading(false);
         console.log('userResponse', userResponse.data.data);
         setBranches(userResponse.data.data);
       }
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   }
   const fetchAlldepartments = async () => {
     try {
+      setLoading(true);
       const userResponse = await getRequest(serviceApi.allDepartments())
       if (userResponse) {
+        setLoading(false);
         console.log('userResponse', userResponse.data.data);
         setdepartments(userResponse.data.data);
       }
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   }
   const fetchAllDesignation = async () => {
     try {
+      setLoading(true);
       const userResponse = await getRequest(serviceApi.allDesignations())
       if (userResponse) {
+        setLoading(false);
         console.log('userResponse', userResponse.data.data);
         setDesignation(userResponse.data.data);
       }
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   }
   const fetchAllReporters = async () => {
     try {
+      setLoading(true);
       const userResponse = await getRequest(serviceApi.allReporters())
       if (userResponse) {
+        setLoading(false);
         console.log('userResponse', userResponse.data.data);
         setReporters(userResponse.data.data);
       }
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   }
   const fetchAllShifts = async () => {
     try {
+      setLoading(true);
       const userResponse = await getRequest(serviceApi.allShifts())
       if (userResponse) {
+        setLoading(false);
         console.log('userResponse', userResponse.data.data);
         setShifts(userResponse.data.data);
       }
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   }
@@ -142,12 +160,17 @@ export default function EmployeeAdd() {
     fetchAllReporters();
     fetchAllShifts();
   }, []);
+  if (loading) {
+    return <div>
+      <LoaderView />
+    </div>
+  }
   return (
     <div className='addEmployeeContainer'>
       {/* EMPLOYEE TITLE */}
       <Row className='AddEmployeeTitle' gutter={16} >
         <Col className="gutter-row left-side-content" span={12} >
-          <h3>Employee Info</h3>
+          <h3>Add Employee</h3>
         </Col>
         <Col className="gutter-row right-side-content" span={12} >
           <Breadcrumb
@@ -159,7 +182,7 @@ export default function EmployeeAdd() {
                 title: 'Employee',
               },
               {
-                title: 'Employee Info',
+                title: 'Add Employee',
               },
             ]}
           />
@@ -169,6 +192,7 @@ export default function EmployeeAdd() {
         name="userCreateForm"
         onFinish={onFinish}
         autoComplete="off"
+        onFinishFailed={onFinishFailed}
       >
         {/* EMPLOYEE HEAD */}
         <Row className='AddEmployeeHeader' gutter={16} >
@@ -184,7 +208,7 @@ export default function EmployeeAdd() {
           <Col className="gutter-row right-side-content" span={7} >
             <Button type="primary"
               htmlType="submit"
-              className="form-submit-btn spacer updateBtn">Update</Button>
+              className="form-submit-btn spacer updateBtn">Add</Button>
             <Button onClick={() => { navigate('/employees') }} className='cancelBtn'>Cancel</Button>
             <MoreOutlined />
           </Col>
@@ -243,7 +267,7 @@ export default function EmployeeAdd() {
                   name="dob"
                   rules={[{ required: true, message: "Date of Birth is required" }]}
                 >
-                  <DatePicker format={dateFormat} />
+                  <DatePicker />
                 </Form.Item>
                 <Form.Item label="Marital status" name="marital_status" rules={[{ required: true, message: "Marital status is required" }]}>
                   <Input
@@ -408,16 +432,17 @@ export default function EmployeeAdd() {
             </Row>
           </Col>
           <Col className="gutter-row right-side-content" span={7} style={{ padding: '25px' }} >
-            <label name="employee_logo" className="fileUploadBtn greenBtn" >
-              <PaperClipOutlined />
-              Choose File
-              <input
-                accept="image/png, image/gif, image/jpeg"
-                type="file"
-                onChange={handleChange}
-              />
-            </label>
-
+            <div>
+              <label name="employee_logo" className="fileUploadBtn greenBtn" >
+                <PaperClipOutlined />
+                Choose File
+                <input
+                  accept="image/png, image/gif, image/jpeg"
+                  type="file"
+                  onChange={handleChange}
+                />
+              </label>
+            </div>
             <img className='uploadImg' src={file ? URL.createObjectURL(file) : null} alt="" />
             <Row className='AddEmployeeContent' gutter={16} >
               <Col className="gutter-row left-side-content" span={24} >
@@ -433,7 +458,7 @@ export default function EmployeeAdd() {
                   name="join_date"
                   rules={[{ required: true, message: "Join Date is required" }]}
                 >
-                  <DatePicker format={dateFormat} />
+                  <DatePicker />
                 </Form.Item>
                 <Form.Item label="PF Number" name="PF_number" rules={[{ required: true, message: "PF Number is required" }]}>
                   <Input

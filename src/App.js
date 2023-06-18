@@ -10,6 +10,7 @@ import EmployeeAdd from './components/employeeAdd';
 import EmployeeView from './components/employeeView';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import EmployeeEdit from './components/employeeEdit';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
               <Route path="/employees" element={<TableData />} />
               <Route path="/addEmployee" element={<EmployeeAdd />} />
               <Route path="/viewEmployee/:id" element={<EmployeeView />} />
+              <Route path="/editEmployee/:id" element={<EmployeeEdit />} />
             </Routes>
           </Col>
         </Row>

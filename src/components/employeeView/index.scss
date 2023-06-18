@@ -34,6 +34,7 @@
                 background-color: #495057;
                 color: #fff;
             }
+            
 
             .cancelBtn {
                 border: 1px solid #F4F4F8;
@@ -166,6 +167,7 @@
             &:nth-child(1) {
                 width: 40%;
             }
+            color: #74788D !important;
         }
 
     }
@@ -186,6 +188,15 @@
     .uploadImg {
         width: 100%;
     }
+   
 
+}
 
+.deleteBtn{
+    background-color: #b20c08 !important;
+    color: #fff;
+    margin-right: 10px;
+    :hover{
+        color: #fff !important;
+    }
 }

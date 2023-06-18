@@ -1,8 +1,67 @@
 .header {
-    text-align: center;
-    h3 {
+    .empBtn{
         text-align: center;
-        margin-top: 20%;
+        margin: 25px;
+        button{
+            background-color: #556ee6;
+            color: #fff;
+        }
     }
-
+    .employeeCard{
+        .ant-card{
+            border: 1px solid #556ee6;
+            .ant-card-head{
+                background-color: #556ee6;
+                color: #fff;
+            }
+            .ant-card-body{
+                background-color: #f5f5f5;
+                h2{
+                    font-weight: 500;
+                }
+                span{
+                    color: #556ee6;
+                }
+            }
+        }
+       
+    }
+    .workingCard{
+        .ant-card{
+            border: 1px solid #34C38F;
+            .ant-card-head{
+                background-color: #34C38F;
+                color: #fff;
+            }
+            .ant-card-body{
+                background-color: #f5f5f5;
+                h2{
+                    font-weight: 500;
+                }
+                span{
+                    color: #34C38F;
+                }
+            }
+        }
+       
+    }
+    .leaveCard{
+        .ant-card{
+            border: 1px solid rgb(235, 168, 52);
+            .ant-card-head{
+                background-color: rgb(235, 168, 52);
+                color: #fff;
+            }
+            .ant-card-body{
+                background-color: #f5f5f5;
+                h2{
+                    font-weight: 500;
+                }
+                span{
+                    color: rgb(235, 168, 52);
+                }
+            }
+        }
+       
+    }
 }

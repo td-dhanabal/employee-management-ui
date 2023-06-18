@@ -1,13 +1,14 @@
 import React from 'react';
-import { Table, Row, Col, Button, Avatar, Space, Tag ,Breadcrumb} from 'antd';
+import { Table, Row, Col, Button, Avatar, Tag, Breadcrumb } from 'antd';
 import { BrowserRouter as Router, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 import { getRequest } from '../../api/http';
 import serviceApi from '../../api/serviceApi';
-import { MoreOutlined ,BarsOutlined} from '@ant-design/icons';
+import { MoreOutlined, BarsOutlined } from '@ant-design/icons';
 import moment from 'moment'
 import { toast } from "react-toastify";
 import './index.scss';
+import LoaderView from '../loaderView';
 
 const columns = [
   {
@@ -63,27 +64,13 @@ const columns = [
         </div>
       );
     },
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (_, record) => (
-      <Space size="middle">
-        <MoreOutlined />
-      </Space>
-    ),
-  },
+  }
 ]
 
 const TableData = () => {
   const [employeeData, setEmployeeData] = useState();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [tableParams, setTableParams] = useState({
-    page: 0,
-    size: 0,
-    userCount: 0
-  });
 
   useEffect(() => {
     fetchUsersData();
@@ -92,73 +79,64 @@ const TableData = () => {
   const fetchUsersData = async () => {
     setLoading(true);
     try {
+      setLoading(false);
       const userResponse = await getRequest(serviceApi.allEmployees())
       if (userResponse) {
         setEmployeeData(userResponse.data.data);
       }
     } catch (error) {
+      setLoading(false);
       toast.error(error);
     }
   }
-
+  if (loading) {
+    return <div>
+      <LoaderView />
+    </div>
+  }
   return (
     <>
       <div className='listContainer'>
-      <Row className='AddEmployeeTitle' gutter={16} >
-        <Col className="gutter-row left-side-content" span={12} >
-          <h3>Employee</h3>
-        </Col>
-        <Col className="gutter-row right-side-content" span={12} >
-          <Breadcrumb
-            items={[
-              {
-                title: 'Dashboard',
-              },
-              {
-                title: 'Employee',
-              }
-            ]}
-          />
-        </Col>
-      </Row>
+        <Row className='AddEmployeeTitle' gutter={16} >
+          <Col className="gutter-row left-side-content" span={12} >
+            <h3>Employee</h3>
+          </Col>
+          <Col className="gutter-row right-side-content" span={12} >
+            <Breadcrumb
+              items={[
+                {
+                  title: 'Dashboard',
+                },
+                {
+                  title: 'Employee',
+                }
+              ]}
+            />
+          </Col>
+        </Row>
         <Row className='title-body' gutter={16} style={{ margin: 0 }}>
           <Col className="gutter-row left-side-content" span={12} >
             <Button onClick={() => { navigate('/addEmployee') }}>Add Employee </Button>
           </Col>
           <Col className="gutter-row filterIcons" span={12} >
-          <BarsOutlined  className='barIcon'/>
-          <MoreOutlined className='menuIcon'/>
+            <BarsOutlined className='barIcon' />
+            <MoreOutlined className='menuIcon' />
           </Col>
         </Row>
         <div className='table-container'>
-          <Table 
-          columns={columns}
-           dataSource={employeeData} 
-           onRow={(record, rowIndex) => {
-            return {
-              onClick: event => { navigate(`/viewEmployee/${record.id}`)
-                console.log(record)
-              }, // click row
-            };
-          }}
-           />
-          {/* <Table
-                        columns={columns}
-                        rowKey={(record) => record.id}
-                        dataSource={data}
-                        loading={loading}
-                        pagination={false}
-                    /> */}
+          <Table
+            columns={columns}
+            dataSource={employeeData&&employeeData}
+            onRow={(record, rowIndex) => {
+              return {
+                onClick: event => {
+                  navigate(`/viewEmployee/${record.id}`)
+                  console.log(record)
+                },
+              };
+            }}
+          />
         </div>
-        {/* <div className='pagination-container'>
-                    <Pagination showSizeChanger onChange={handleTableChange}
-                        loading={loading}
-                        current={tableParams?.page}
-                        total={tableParams?.userCount}
-                        pageSize={tableParams?.size}
-                    />
-                </div> */}
-
       </div>
     </>
   );
